@@ -1,0 +1,40 @@
+[project]
+name = "atlasctl"
+version = "0.1.0"
+description = "Operator CLI for Atlas: run VM/image/IP tasks over the Atlas API instead of SSHing into a host."
+requires-python = ">=3.12"
+dependencies = [
+    "atlas-client",
+    "click>=8.1",
+]
+
+[project.scripts]
+atlasctl = "atlasctl.cli:run"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[tool.uv.sources]
+# Assumes the atlas monorepo is checked out alongside this repo, as it is for
+# Atlas's own team. atlas-client isn't published anywhere yet -- once it is
+# (PyPI, or a private index), drop this override and pin a real version.
+# Until then, anyone without that layout can override this to a git source:
+#   atlas-client = { git = "https://github.com/frappe/atlas.git", subdirectory = "clients/atlas-client" }
+atlas-client = { path = "../atlas/clients/atlas-client" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["atlasctl"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]

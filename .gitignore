@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# uv / venv
+.venv/
+venv/
+
+# Test / lint / type-check caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Secrets — atlasctl's real config lives in ~/.config/atlasctl/, never here,
+# but this catches anyone testing with a local credentials file by habit.
+.env
+*.local.toml
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
